@@ -2,6 +2,7 @@ package com.example.backend.controllers;
 
 import java.util.List;
 
+import org.apache.el.stream.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,21 +24,27 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins="http://localhost:8080")
 public class PokemonController {
 	PokemonRepository pokemonRepository;	
-	  @PostMapping 
+	  	
+	public PokemonController(PokemonRepository pokemonRepository) {
+        this.pokemonRepository = pokemonRepository;
+    }
+	
+		@PostMapping 
 	    public ResponseEntity<Pokemon> crearPokemon(@RequestBody Pokemon nuevoPokemon) {
 	       	        Pokemon pokemonGuardado = pokemonRepository.save(nuevoPokemon);	        
 	        return ResponseEntity.status(HttpStatus.CREATED).body(pokemonGuardado);
 	    }
 	  
-	  @GetMapping("/tipo/{tipoPokemonId}") //
-	    public ResponseEntity<List<Pokemon>> getPokemonesPorTipo(@PathVariable Long tipoPokemonId) {
-	        
-	        List<Pokemon> pokemonesPorTipo = pokemonRepository.findByTipoPokemonId(tipoPokemonId);       
-	        	        if (pokemonesPorTipo.isEmpty()) {
-	            
-	            return ResponseEntity.notFound().build();
-	        }
-	        return ResponseEntity.ok(pokemonesPorTipo);
-	    }
+		@GetMapping("/tipo/{uuid}")
+		public ResponseEntity<List<Pokemon>> getPokemonesPorUuid(@PathVariable String uuid) {
+		    List<Pokemon> pokemonesPorTipo = pokemonRepository.findByUuid(uuid);
+
+		    if (pokemonesPorTipo.isEmpty()) {
+		        return ResponseEntity.notFound().build();
+		    }
+
+		    return ResponseEntity.ok(pokemonesPorTipo);
+		}
+	  
 	
 }
