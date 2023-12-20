@@ -26,7 +26,7 @@ public class Pokemon {
 	private String descripcion;
 	
 	@ManyToOne
-	@JoinColumn(name ="id")
+	@JoinColumn(name ="tipo_pokemon")
 	private TipoPokemon tipo_pokemon;
 
 	private Date fecha_descubrimiento;

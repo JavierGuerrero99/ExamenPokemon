@@ -2,6 +2,7 @@ package com.example.backend.entities;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Entrenador {
 	private Date fecha_vinculacion;
 	
 	@ManyToOne
-	@JoinColumn(name ="id")
+	@JoinColumn(name ="pueblo_id")
 	private Pueblo pueblo_id;
 	
 	private Integer uuid;

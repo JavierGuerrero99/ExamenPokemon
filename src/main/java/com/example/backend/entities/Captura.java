@@ -21,11 +21,11 @@ public class Captura {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name ="id")
+	@JoinColumn(name ="pokemon_id")
 	private Pokemon pokemon_id;
 	
 	@ManyToOne
-	@JoinColumn(name ="id")
+	@JoinColumn(name ="entrenador_id")
 	private Entrenador entrenador_id;
 	
 }
